@@ -15,8 +15,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$CanvasLayer/HSplitContainer/Label.text = str(player.item_num)
-	$CanvasLayer/HSplitContainer2/Label.text = str(player.health)
+#	$CanvasLayer/HSplitContainer/Label.text = str(player.item_num)
+#	$CanvasLayer/HSplitContainer2/Label.text = str(player.health)
 	if Input.is_action_just_pressed("build"):
 		print(player.item_num)
 		if player.item_num >= 5:

@@ -26,8 +26,10 @@ func effect_bigger():
 	$bigger_Timer.start()
 	
 func effect_get_sheild():
-	player.item_num += 1
-	player.health += 1
+	if player.shield < 5:
+		player.shield += 1
+	if player.health < 100:
+		player.health += 1
 	
 func _on_bigger_timer_timeout():
 	collisionShape.scale = Vector2(1, 1)

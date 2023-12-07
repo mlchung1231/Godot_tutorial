@@ -23,11 +23,15 @@ func _on_timer_timeout():
 func _on_tree_entered():
 	global_position = Vector2(randi_range(-500, 500), randi_range(-500, 500))
 	
-
+		
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player"):
+		player.health -= 10 - player.shield
 		queue_free()
 		
 func _on_navigation_agent_2d_tree_entered():
 	pass
 		
+
+
+

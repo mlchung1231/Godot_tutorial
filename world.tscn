@@ -1045,6 +1045,7 @@ position = Vector2(100, -8)
 scale = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer"]
 offset_right = 36.0
