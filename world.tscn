@@ -1045,7 +1045,6 @@ position = Vector2(100, -8)
 scale = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer"]
 offset_right = 36.0
@@ -1078,4 +1077,5 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "0"
 
+[connection signal="build_terret" from="player" to="." method="_on_player_build_terret"]
 [connection signal="timeout" from="mob_spawn_timer" to="." method="_on_mob_spawn_timer_timeout"]

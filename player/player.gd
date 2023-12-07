@@ -3,6 +3,10 @@ extends CharacterBody2D
 @export var speed: int = 35
 @onready var animations = $AnimationPlayer
 
+var bullet = preload("res://things/turret/bomb.tscn")
+
+signal build_terret
+
 var move_vector = Vector2(0,0)
 var joystick_active = false
 
@@ -26,7 +30,15 @@ func handle_input():
 	else:
 		velocity = Vector2(0,0) * speed
 		$HUD/Joystick_mark.position = $HUD/Joystick.position
-
+	
+	if item_num < 5:
+		$HUD/Build_button.modulate = Color.DIM_GRAY
+	else:
+		$HUD/Build_button.modulate = Color.WHITE
+	
+	if can_shoot and is_shooting:
+		shoot()
+		
 
 func _input(event):
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
@@ -65,6 +77,43 @@ func _physics_process(delta):
 	move_and_slide()
 	updatAnimation()
 
+func _on_attack_button_button_down():
+	$HUD/Attack_button.modulate = Color.ORANGE
+	is_shooting = true
+
+func _on_attack_button_button_up():
+	$HUD/Attack_button.modulate = Color.WHITE
+	is_shooting = false
+
 func _on_auto_attack_body_entered(body):
 	if body.is_in_group("mob"):
 		attack_able_mob.push_back(body)
+
+func _on_auto_attack_body_exited(body):
+	if body.is_in_group("mob"):
+		attack_able_mob.erase(body)
+	if body == bullet:
+		body.queue_free()
+
+func _on_build_button_pressed():
+	emit_signal("build_terret")
+	
+
+func shoot():
+	var projectile = bullet.instantiate()
+	add_child(projectile)
+		
+	if !attack_able_mob.is_empty():
+		var nearest_mob = attack_able_mob[0]
+		for i in range(attack_able_mob.size()):
+			if position.distance_to(attack_able_mob[i].position) < position.distance_to(nearest_mob.position):
+				nearest_mob = attack_able_mob[i]
+				
+		look_at(nearest_mob.position)
+		
+	projectile.transform = $Marker2D.transform
+	$Reload.start()
+	can_shoot = false
+
+func _on_reload_timeout():
+	can_shoot = true

@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8kkkyihybjsj"]
+[gd_scene load_steps=19 format=3 uid="uid://b8kkkyihybjsj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_n4vna"]
 [ext_resource type="Texture2D" uid="uid://0x5igftjrf4x" path="res://art/SpriteSheet.png" id="1_nfqv3"]
 [ext_resource type="Script" path="res://player/buff.gd" id="3_31cge"]
+[ext_resource type="Texture2D" uid="uid://bqwm5a6u2vwa2" path="res://art/建造.png" id="4_c4j7u"]
+[ext_resource type="Texture2D" uid="uid://cba548ooihjni" path="res://art/攻擊.png" id="4_ggsow"]
 [ext_resource type="Texture2D" uid="uid://bjcilakpnyv02" path="res://art/joystick.png" id="4_twmut"]
 [ext_resource type="Texture2D" uid="uid://dgyeaf0w5u8wl" path="res://art/移動桿.png" id="5_kmxrf"]
 
@@ -117,7 +119,7 @@ _data = {
 size = Vector2(15, 15)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eafo0"]
-radius = 80.0
+radius = 116.501
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2mvb"]
 radius = 60.0
@@ -160,15 +162,30 @@ process_callback = 0
 position = Vector2(0.5, -7.5)
 shape = SubResource("CircleShape2D_eafo0")
 
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Reload" type="Timer" parent="."]
+wait_time = 0.3
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Attack_button" type="Button" parent="HUD"]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 200.0
+offset_top = 85.0
+offset_right = 288.0
+offset_bottom = 174.0
+scale = Vector2(0.25, 0.25)
+icon = ExtResource("4_ggsow")
+flat = true
 
 [node name="Build_button" type="Button" parent="HUD"]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 160.0
+offset_top = 85.0
+offset_right = 248.0
+offset_bottom = 174.0
+scale = Vector2(0.25, 0.25)
+icon = ExtResource("4_c4j7u")
+flat = true
 
 [node name="Joystick" type="Sprite2D" parent="HUD"]
 position = Vector2(45, 95)
@@ -186,3 +203,8 @@ texture = ExtResource("5_kmxrf")
 [connection signal="timeout" from="buff/bigger_Timer" to="." method="_on_bigger_timer_timeout"]
 [connection signal="timeout" from="buff/bigger_Timer" to="buff" method="_on_bigger_timer_timeout"]
 [connection signal="body_entered" from="auto_attack" to="." method="_on_auto_attack_body_entered"]
+[connection signal="body_exited" from="auto_attack" to="." method="_on_auto_attack_body_exited"]
+[connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]
+[connection signal="button_down" from="HUD/Attack_button" to="." method="_on_attack_button_button_down"]
+[connection signal="button_up" from="HUD/Attack_button" to="." method="_on_attack_button_button_up"]
+[connection signal="pressed" from="HUD/Build_button" to="." method="_on_build_button_pressed"]
