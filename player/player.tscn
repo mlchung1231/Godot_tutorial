@@ -205,6 +205,3 @@ texture = ExtResource("5_kmxrf")
 [connection signal="body_entered" from="auto_attack" to="." method="_on_auto_attack_body_entered"]
 [connection signal="body_exited" from="auto_attack" to="." method="_on_auto_attack_body_exited"]
 [connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]
-[connection signal="button_down" from="HUD/Attack_button" to="." method="_on_attack_button_button_down"]
-[connection signal="button_up" from="HUD/Attack_button" to="." method="_on_attack_button_button_up"]
-[connection signal="pressed" from="HUD/Build_button" to="." method="_on_build_button_pressed"]

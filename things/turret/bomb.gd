@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed : int = 750
-var attack_range
+
 
 func _physics_process(delta):
 	position += transform.x * speed * delta
