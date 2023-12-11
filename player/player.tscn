@@ -1,12 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://b8kkkyihybjsj"]
+[gd_scene load_steps=22 format=3 uid="uid://b8kkkyihybjsj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_n4vna"]
 [ext_resource type="Texture2D" uid="uid://0x5igftjrf4x" path="res://art/SpriteSheet.png" id="1_nfqv3"]
 [ext_resource type="Script" path="res://player/buff.gd" id="3_31cge"]
 [ext_resource type="Texture2D" uid="uid://bqwm5a6u2vwa2" path="res://art/建造.png" id="4_c4j7u"]
 [ext_resource type="Texture2D" uid="uid://cba548ooihjni" path="res://art/攻擊.png" id="4_ggsow"]
+[ext_resource type="Script" path="res://player/HUD.gd" id="4_gwmm1"]
 [ext_resource type="Texture2D" uid="uid://bjcilakpnyv02" path="res://art/joystick.png" id="4_twmut"]
 [ext_resource type="Texture2D" uid="uid://dgyeaf0w5u8wl" path="res://art/移動桿.png" id="5_kmxrf"]
+[ext_resource type="PackedScene" uid="uid://bcgndkkx34l1w" path="res://Menu/menu.tscn" id="8_dpdkg"]
+[ext_resource type="Texture2D" uid="uid://cktm45pf8xyqd" path="res://art/設定.png" id="9_k7qym"]
 
 [sub_resource type="Shader" id="Shader_lfivs"]
 code = "shader_type canvas_item;
@@ -168,6 +171,7 @@ shape = SubResource("CircleShape2D_eafo0")
 wait_time = 0.3
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_gwmm1")
 
 [node name="Attack_button" type="Button" parent="HUD"]
 offset_left = 200.0
@@ -175,6 +179,7 @@ offset_top = 85.0
 offset_right = 288.0
 offset_bottom = 174.0
 scale = Vector2(0.25, 0.25)
+focus_mode = 0
 icon = ExtResource("4_ggsow")
 flat = true
 
@@ -184,6 +189,7 @@ offset_top = 85.0
 offset_right = 248.0
 offset_bottom = 174.0
 scale = Vector2(0.25, 0.25)
+focus_mode = 0
 icon = ExtResource("4_c4j7u")
 flat = true
 
@@ -200,8 +206,29 @@ position = Vector2(45, 95)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_kmxrf")
 
+[node name="Menu_button" type="Button" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_bottom = 45.0
+grow_horizontal = 0
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(35, 5)
+focus_mode = 0
+icon = ExtResource("9_k7qym")
+flat = true
+
+[node name="Menu" parent="HUD" instance=ExtResource("8_dpdkg")]
+visible = false
+
 [connection signal="timeout" from="buff/bigger_Timer" to="." method="_on_bigger_timer_timeout"]
 [connection signal="timeout" from="buff/bigger_Timer" to="buff" method="_on_bigger_timer_timeout"]
 [connection signal="body_entered" from="auto_attack" to="." method="_on_auto_attack_body_entered"]
 [connection signal="body_exited" from="auto_attack" to="." method="_on_auto_attack_body_exited"]
 [connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]
+[connection signal="back_to_game" from="HUD" to="." method="_on_hud_back_to_game"]
+[connection signal="pause" from="HUD" to="." method="_on_hud_pause"]
+[connection signal="pressed" from="HUD/Menu_button" to="HUD" method="_on_menu_nutton_pressed"]
+[connection signal="button_move" from="HUD/Menu" to="HUD" method="_on_menu_button_move"]
+[connection signal="close_menu" from="HUD/Menu" to="HUD" method="_on_menu_close_menu"]

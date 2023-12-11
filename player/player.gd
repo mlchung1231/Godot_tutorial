@@ -1,6 +1,10 @@
 extends CharacterBody2D
 
 @export var speed: int = 35
+@export var attack_position: Array = [200 ,85]
+@export var build_position: Array = [160 ,85]
+@export var joystick_position: Array = [45 ,95]
+
 @onready var animations = $AnimationPlayer
 
 var bullet = preload("res://player/bullet.tscn")
@@ -144,4 +148,10 @@ func shoot():
 	can_shoot = false
 
 func _on_reload_timeout():
+	can_shoot = true
+
+func _on_hud_pause():
+	can_shoot = false
+
+func _on_hud_back_to_game():
 	can_shoot = true

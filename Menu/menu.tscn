@@ -1,0 +1,270 @@
+[gd_scene load_steps=19 format=3 uid="uid://bcgndkkx34l1w"]
+
+[ext_resource type="Script" path="res://Menu/menu.gd" id="1_7yl7d"]
+[ext_resource type="Texture2D" uid="uid://ogrfr35fivmv" path="res://art/設定按鈕.png" id="1_optej"]
+[ext_resource type="FontFile" uid="uid://cdsft4jit0pak" path="res://art/font.TTF" id="2_56l2w"]
+[ext_resource type="Texture2D" uid="uid://cf4qdlb35lder" path="res://art/設定返回.png" id="3_bfxfd"]
+[ext_resource type="Texture2D" uid="uid://dgyeaf0w5u8wl" path="res://art/移動桿.png" id="4_eqdew"]
+[ext_resource type="Texture2D" uid="uid://cba548ooihjni" path="res://art/攻擊.png" id="5_cvjn3"]
+[ext_resource type="Script" path="res://Menu/Joystick.gd" id="5_glntf"]
+[ext_resource type="Script" path="res://Menu/Attack.gd" id="6_ka87m"]
+[ext_resource type="Texture2D" uid="uid://bqwm5a6u2vwa2" path="res://art/建造.png" id="7_vsem5"]
+[ext_resource type="Script" path="res://Menu/Build.gd" id="8_1hwed"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nkqn3"]
+line_spacing = 0.0
+font = ExtResource("2_56l2w")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_h7laf"]
+line_spacing = 0.0
+font = ExtResource("2_56l2w")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_e6qpq"]
+line_spacing = 0.0
+font = ExtResource("2_56l2w")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_vm5xr"]
+line_spacing = 0.0
+font = ExtResource("2_56l2w")
+font_size = 30
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_40o2b"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ae7ov"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7fej"]
+radius = 40.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_iy8c0"]
+line_spacing = 0.0
+font = ExtResource("2_56l2w")
+font_size = 30
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7yl7d")
+
+[node name="Options" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -52.5
+offset_right = 381.0
+offset_bottom = 230.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+theme_override_constants/separation = 8
+
+[node name="Music" type="Button" parent="Options/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("1_optej")
+flat = true
+
+[node name="Label" type="Label" parent="Options/VBoxContainer/Music"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -13.0
+offset_right = 23.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Music"
+label_settings = SubResource("LabelSettings_nkqn3")
+
+[node name="Adjustment" type="Button" parent="Options/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("1_optej")
+flat = true
+
+[node name="Label" type="Label" parent="Options/VBoxContainer/Adjustment"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.0
+offset_top = -15.5
+offset_right = 127.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Adjustment"
+label_settings = SubResource("LabelSettings_h7laf")
+
+[node name="Quit_game" type="Button" parent="Options/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("1_optej")
+flat = true
+
+[node name="Label" type="Label" parent="Options/VBoxContainer/Quit_game"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit Game"
+label_settings = SubResource("LabelSettings_e6qpq")
+
+[node name="BackFromOption" type="Button" parent="Options"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -30.0
+offset_right = 158.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+focus_mode = 0
+icon = ExtResource("3_bfxfd")
+flat = true
+
+[node name="Label" type="Label" parent="Options/BackFromOption"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_vm5xr")
+
+[node name="Music_page" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Adjust_page" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Joystick" type="Sprite2D" parent="Adjust_page"]
+position = Vector2(45, 95)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_eqdew")
+offset = Vector2(-1, 0)
+script = ExtResource("5_glntf")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Adjust_page/Joystick"]
+shape = SubResource("CircleShape2D_40o2b")
+
+[node name="Attack" type="Sprite2D" parent="Adjust_page"]
+position = Vector2(211, 96)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_cvjn3")
+script = ExtResource("6_ka87m")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Adjust_page/Attack"]
+shape = SubResource("CircleShape2D_ae7ov")
+
+[node name="Build" type="Sprite2D" parent="Adjust_page"]
+position = Vector2(171, 96)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_vsem5")
+script = ExtResource("8_1hwed")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Adjust_page/Build"]
+shape = SubResource("CircleShape2D_x7fej")
+
+[node name="BackFromAdjust" type="Button" parent="Adjust_page"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -30.0
+offset_right = 158.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+focus_mode = 0
+icon = ExtResource("3_bfxfd")
+flat = true
+
+[node name="Label" type="Label" parent="Adjust_page/BackFromAdjust"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_iy8c0")
+
+[connection signal="pressed" from="Options/VBoxContainer/Music" to="." method="_on_music_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Adjustment" to="." method="_on_adjustment_pressed"]
+[connection signal="pressed" from="Options/BackFromOption" to="." method="_on_back_from_option_pressed"]
+[connection signal="pressed" from="Adjust_page/Joystick/TouchScreenButton" to="Adjust_page/Joystick" method="_on_touch_screen_button_pressed"]
+[connection signal="released" from="Adjust_page/Joystick/TouchScreenButton" to="Adjust_page/Joystick" method="_on_touch_screen_button_released"]
+[connection signal="pressed" from="Adjust_page/Attack/TouchScreenButton" to="Adjust_page/Attack" method="_on_touch_screen_button_pressed"]
+[connection signal="released" from="Adjust_page/Attack/TouchScreenButton" to="Adjust_page/Attack" method="_on_touch_screen_button_released"]
+[connection signal="pressed" from="Adjust_page/Build/TouchScreenButton" to="Adjust_page/Build" method="_on_touch_screen_button_pressed"]
+[connection signal="released" from="Adjust_page/Build/TouchScreenButton" to="Adjust_page/Build" method="_on_touch_screen_button_released"]
+[connection signal="pressed" from="Adjust_page/BackFromAdjust" to="." method="_on_back_from_adjust_pressed"]
