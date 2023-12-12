@@ -1,9 +1,5 @@
 extends Sprite2D
 
-var player = preload("res://player/player.tscn")
-var player_data = player.instantiate()
-var attack_position = player_data.attack_position
-
 var newDeltaX
 var newDeltaY
 var deltaX
@@ -12,7 +8,8 @@ var touchPos = Vector2()
 var areaEnt = false
  
 func _ready():
-	set_position(Vector2(attack_position[0]+11, attack_position[1]+11))
+	#set_position(Vector2(attack_position[0]+11, attack_position[1]+11))
+	pass
 	
 
 func _on_touch_screen_button_pressed():
@@ -34,9 +31,8 @@ func _input(event):
 				newDeltaX = touchPos.x - deltaX
 				newDeltaY = touchPos.y - deltaY
 				set_position(Vector2(newDeltaX, newDeltaY))
-				attack_position[0] = newDeltaX-11
-				attack_position[1] = newDeltaY-11
+				
 			else:
 				newDeltaY = touchPos.y - deltaY
 				set_position(Vector2(newDeltaX, newDeltaY))
-				attack_position[1] = newDeltaY
+				

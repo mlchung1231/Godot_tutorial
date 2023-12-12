@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjnirvosm6qsq"]
+[gd_scene load_steps=8 format=3 uid="uid://cjnirvosm6qsq"]
 
 [ext_resource type="Script" path="res://things/mob/enemy.gd" id="1_4lkp1"]
 [ext_resource type="Texture2D" uid="uid://bciw6kfd4p5ha" path="res://art/icon.svg" id="1_avh12"]
+[ext_resource type="Texture2D" uid="uid://crc53tkbwf1ye" path="res://art/Healthbar/HealthBack.png" id="3_kdljk"]
+[ext_resource type="Texture2D" uid="uid://dc6yx4e317edp" path="res://art/Healthbar/Healthover.png" id="4_i374s"]
+[ext_resource type="Texture2D" uid="uid://b16mvt6thnf05" path="res://art/Healthbar/HealthProcess.png" id="5_0cgbo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5p11"]
 radius = 25.02
@@ -37,7 +40,29 @@ autostart = true
 position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_wyo7h")
 
+[node name="Mob_stun" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = -21.0
+offset_top = 29.0
+offset_right = 882.0
+offset_bottom = 164.0
+scale = Vector2(0.05, 0.05)
+max_value = 30.0
+value = 30.0
+texture_under = ExtResource("3_kdljk")
+texture_over = ExtResource("4_i374s")
+texture_progress = ExtResource("5_0cgbo")
+
+[node name="Turn" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_entered" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_tree_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Mob_stun" to="." method="_on_mob_stun_timeout"]
+[connection signal="timeout" from="Turn" to="." method="_on_turn_timeout"]

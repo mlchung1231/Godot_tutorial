@@ -5,6 +5,7 @@ extends Node2D
 @export var turret : PackedScene
 
 var player
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(100):
@@ -37,3 +38,7 @@ func _on_player_build_terret():
 			add_child(temp)
 			temp.position = player.global_position
 			player.item_num -= 5
+
+
+func _on_timer_timeout():
+	Global.time += 1

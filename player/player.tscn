@@ -1,15 +1,22 @@
-[gd_scene load_steps=22 format=3 uid="uid://b8kkkyihybjsj"]
+[gd_scene load_steps=40 format=3 uid="uid://b8kkkyihybjsj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_n4vna"]
 [ext_resource type="Texture2D" uid="uid://0x5igftjrf4x" path="res://art/SpriteSheet.png" id="1_nfqv3"]
 [ext_resource type="Script" path="res://player/buff.gd" id="3_31cge"]
 [ext_resource type="Texture2D" uid="uid://bqwm5a6u2vwa2" path="res://art/建造.png" id="4_c4j7u"]
 [ext_resource type="Texture2D" uid="uid://cba548ooihjni" path="res://art/攻擊.png" id="4_ggsow"]
-[ext_resource type="Script" path="res://player/HUD.gd" id="4_gwmm1"]
 [ext_resource type="Texture2D" uid="uid://bjcilakpnyv02" path="res://art/joystick.png" id="4_twmut"]
+[ext_resource type="Script" path="res://player/HUD.gd" id="4_un3h3"]
 [ext_resource type="Texture2D" uid="uid://dgyeaf0w5u8wl" path="res://art/移動桿.png" id="5_kmxrf"]
-[ext_resource type="PackedScene" uid="uid://bcgndkkx34l1w" path="res://Menu/menu.tscn" id="8_dpdkg"]
-[ext_resource type="Texture2D" uid="uid://cktm45pf8xyqd" path="res://art/設定.png" id="9_k7qym"]
+[ext_resource type="PackedScene" uid="uid://bcgndkkx34l1w" path="res://Menu/menu.tscn" id="8_5cky0"]
+[ext_resource type="Texture2D" uid="uid://cktm45pf8xyqd" path="res://art/設定.png" id="10_0iej2"]
+[ext_resource type="Texture2D" uid="uid://crc53tkbwf1ye" path="res://art/Healthbar/HealthBack.png" id="11_crass"]
+[ext_resource type="Texture2D" uid="uid://dc6yx4e317edp" path="res://art/Healthbar/Healthover.png" id="12_dxm7j"]
+[ext_resource type="Texture2D" uid="uid://b16mvt6thnf05" path="res://art/Healthbar/HealthProcess.png" id="13_nqaog"]
+[ext_resource type="FontFile" uid="uid://cdsft4jit0pak" path="res://art/font.TTF" id="14_7y230"]
+[ext_resource type="Texture2D" uid="uid://bd3ostqgn4gxw" path="res://art/Setting/設定背景.png" id="14_vw4du"]
+[ext_resource type="Texture2D" uid="uid://bciw6kfd4p5ha" path="res://art/icon.svg" id="15_ly0ld"]
+[ext_resource type="Texture2D" uid="uid://c3hpce6op7pcp" path="res://art/Setting/設定確認.png" id="16_f4mmv"]
 
 [sub_resource type="Shader" id="Shader_lfivs"]
 code = "shader_type canvas_item;
@@ -21,6 +28,9 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rjyn4"]
 shader = SubResource("Shader_lfivs")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7hc8"]
+size = Vector2(15, 15)
 
 [sub_resource type="Animation" id="Animation_g7hn4"]
 length = 0.001
@@ -127,6 +137,56 @@ radius = 116.501
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2mvb"]
 radius = 60.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_tylob"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_ufbqe"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_mfr28"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_5gqw6"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_2s0uo"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_0skio"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_sw4xm"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_x4gd0"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_a4gs5"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_o00x7"]
+line_spacing = 0.0
+font = ExtResource("14_7y230")
+font_size = 30
+
 [node name="player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 y_sort_enabled = true
@@ -142,6 +202,12 @@ texture = ExtResource("1_nfqv3")
 offset = Vector2(0, -8)
 hframes = 4
 vframes = 7
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, -7.5)
+shape = SubResource("RectangleShape2D_k7hc8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -170,10 +236,25 @@ shape = SubResource("CircleShape2D_eafo0")
 [node name="Reload" type="Timer" parent="."]
 wait_time = 0.3
 
-[node name="HUD" type="CanvasLayer" parent="."]
-script = ExtResource("4_gwmm1")
+[node name="Stun" type="Timer" parent="."]
+wait_time = 0.1
 
-[node name="Attack_button" type="Button" parent="HUD"]
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_un3h3")
+
+[node name="Menu" parent="HUD" instance=ExtResource("8_5cky0")]
+visible = false
+
+[node name="game_button" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Attack_button" type="Button" parent="HUD/game_button"]
+layout_mode = 0
 offset_left = 200.0
 offset_top = 85.0
 offset_right = 288.0
@@ -183,7 +264,8 @@ focus_mode = 0
 icon = ExtResource("4_ggsow")
 flat = true
 
-[node name="Build_button" type="Button" parent="HUD"]
+[node name="Build_button" type="Button" parent="HUD/game_button"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 85.0
 offset_right = 248.0
@@ -193,18 +275,226 @@ focus_mode = 0
 icon = ExtResource("4_c4j7u")
 flat = true
 
-[node name="Joystick" type="Sprite2D" parent="HUD"]
+[node name="Joystick" type="Sprite2D" parent="HUD/game_button"]
 position = Vector2(45, 95)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_twmut")
 
-[node name="Touch_area" type="TouchScreenButton" parent="HUD/Joystick"]
+[node name="Touch_area" type="TouchScreenButton" parent="HUD/game_button/Joystick"]
 shape = SubResource("CircleShape2D_v2mvb")
 
-[node name="Joystick_mark" type="Sprite2D" parent="HUD"]
+[node name="Joystick_mark" type="Sprite2D" parent="HUD/game_button"]
 position = Vector2(45, 95)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_kmxrf")
+
+[node name="HealthBar" type="TextureProgressBar" parent="HUD"]
+offset_left = 20.0
+offset_top = 5.0
+offset_right = 923.0
+offset_bottom = 140.0
+scale = Vector2(0.05, 0.05)
+value = 100.0
+texture_under = ExtResource("11_crass")
+texture_over = ExtResource("12_dxm7j")
+texture_progress = ExtResource("13_nqaog")
+
+[node name="Label" type="Label" parent="HUD/HealthBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -50.5
+offset_right = -72.0
+offset_bottom = 50.5
+grow_vertical = 2
+text = "HP"
+label_settings = SubResource("LabelSettings_tylob")
+
+[node name="Shield" type="Label" parent="HUD"]
+offset_left = 7.0
+offset_top = 16.0
+offset_right = 470.0
+offset_bottom = 117.0
+scale = Vector2(0.05, 0.05)
+text = "Shield"
+label_settings = SubResource("LabelSettings_ufbqe")
+
+[node name="Label" type="Label" parent="HUD/Shield"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 137.0
+offset_top = -50.5
+offset_right = 231.0
+offset_bottom = 50.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_mfr28")
+
+[node name="Dead" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/Dead"]
+position = Vector2(120, 68)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("14_vw4du")
+
+[node name="title" type="Label" parent="HUD/Dead/Sprite2D"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -349.0
+offset_top = -65.0
+offset_right = -91.0
+offset_bottom = -38.0
+grow_horizontal = 2
+text = "You are Dead"
+label_settings = SubResource("LabelSettings_5gqw6")
+
+[node name="time" type="Label" parent="HUD/Dead/Sprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -122.5
+offset_right = -150.0
+offset_bottom = -99.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "survival time"
+label_settings = SubResource("LabelSettings_2s0uo")
+
+[node name="value" type="Label" parent="HUD/Dead/Sprite2D/time"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -8.5
+offset_right = 64.0
+offset_bottom = 6.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0 : 00"
+label_settings = SubResource("LabelSettings_0skio")
+
+[node name="enemy" type="Label" parent="HUD/Dead/Sprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -236.0
+offset_top = -92.5
+offset_right = -140.0
+offset_bottom = -73.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "kill  x"
+label_settings = SubResource("LabelSettings_sw4xm")
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/Dead/Sprite2D/enemy"]
+position = Vector2(-25.5385, 9.61536)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("15_ly0ld")
+
+[node name="value" type="Label" parent="HUD/Dead/Sprite2D/enemy"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 9.0
+offset_top = -8.5
+offset_right = 65.0
+offset_bottom = 10.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_x4gd0")
+
+[node name="retry" type="Button" parent="HUD/Dead/Sprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -60.5
+offset_right = -157.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+focus_mode = 0
+icon = ExtResource("16_f4mmv")
+flat = true
+
+[node name="Label" type="Label" parent="HUD/Dead/Sprite2D/retry"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Retry"
+label_settings = SubResource("LabelSettings_a4gs5")
+
+[node name="exit" type="Button" parent="HUD/Dead/Sprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -60.5
+offset_right = -47.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+focus_mode = 0
+icon = ExtResource("16_f4mmv")
+flat = true
+
+[node name="Label" type="Label" parent="HUD/Dead/Sprite2D/exit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+label_settings = SubResource("LabelSettings_o00x7")
 
 [node name="Menu_button" type="Button" parent="HUD"]
 anchors_preset = 1
@@ -213,22 +503,26 @@ anchor_right = 1.0
 offset_left = -45.0
 offset_bottom = 45.0
 grow_horizontal = 0
-scale = Vector2(0.25, 0.25)
-pivot_offset = Vector2(35, 5)
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(35, 10)
 focus_mode = 0
-icon = ExtResource("9_k7qym")
+icon = ExtResource("10_0iej2")
 flat = true
 
-[node name="Menu" parent="HUD" instance=ExtResource("8_dpdkg")]
-visible = false
-
+[connection signal="player_dead" from="." to="HUD" method="_on_player_player_dead"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="buff/bigger_Timer" to="." method="_on_bigger_timer_timeout"]
 [connection signal="timeout" from="buff/bigger_Timer" to="buff" method="_on_bigger_timer_timeout"]
 [connection signal="body_entered" from="auto_attack" to="." method="_on_auto_attack_body_entered"]
 [connection signal="body_exited" from="auto_attack" to="." method="_on_auto_attack_body_exited"]
 [connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]
+[connection signal="timeout" from="Stun" to="." method="_on_stun_timeout"]
 [connection signal="back_to_game" from="HUD" to="." method="_on_hud_back_to_game"]
+[connection signal="button_position" from="HUD" to="HUD/Menu" method="_on_hud_button_position"]
 [connection signal="pause" from="HUD" to="." method="_on_hud_pause"]
-[connection signal="pressed" from="HUD/Menu_button" to="HUD" method="_on_menu_nutton_pressed"]
+[connection signal="reset_player" from="HUD" to="." method="_on_hud_reset_player"]
 [connection signal="button_move" from="HUD/Menu" to="HUD" method="_on_menu_button_move"]
 [connection signal="close_menu" from="HUD/Menu" to="HUD" method="_on_menu_close_menu"]
+[connection signal="pressed" from="HUD/Dead/Sprite2D/retry" to="HUD" method="_on_retry_pressed"]
+[connection signal="pressed" from="HUD/Dead/Sprite2D/exit" to="HUD" method="_on_exit_pressed"]
+[connection signal="pressed" from="HUD/Menu_button" to="HUD" method="_on_menu_button_pressed"]

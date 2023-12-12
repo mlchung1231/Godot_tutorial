@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ca7og"]
 radius = 4.0
 
-[node name="bullet" type="Area2D"]
+[node name="bullet" type="Area2D" groups=["bullet"]]
 script = ExtResource("1_nsjdf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -18,5 +18,7 @@ shape = SubResource("CircleShape2D_ca7og")
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="mob_stun" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

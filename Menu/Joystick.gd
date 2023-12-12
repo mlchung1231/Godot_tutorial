@@ -1,8 +1,5 @@
 extends Sprite2D
 
-var player = preload("res://player/player.tscn")
-var player_data = player.instantiate()
-var joystick_position = player_data.joystick_position
 
 var newDeltaX
 var newDeltaY
@@ -12,8 +9,8 @@ var touchPos = Vector2()
 var areaEnt = false
  
 func _ready():
-	set_position(Vector2(joystick_position[0],joystick_position[1]))
-	
+	#set_position(Vector2(joystick_position[0],joystick_position[1]))
+	pass
 
 func _on_touch_screen_button_pressed():
 	areaEnt = true
@@ -34,10 +31,7 @@ func _input(event):
 				newDeltaX = touchPos.x - deltaX
 				newDeltaY = touchPos.y - deltaY
 				set_position(Vector2(newDeltaX, newDeltaY))
-				joystick_position[0] = newDeltaX
-				joystick_position[1] = newDeltaY
 			else:
 				newDeltaY = touchPos.y - deltaY
 				set_position(Vector2(newDeltaX, newDeltaY))
-				joystick_position[1] = newDeltaY
 				
